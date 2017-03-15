@@ -3,6 +3,7 @@ namespace Fruty\SmartHome\Exchange\Concern\Commands;
 
 class CreateExchangeCommand
 {
+
     /**
      * @return array
      */

@@ -18,7 +18,7 @@ class CreateExchangeHandler implements EventDispatcherAwareInterface, ExchangeRe
 
     /**
      * @param CreateExchangeCommand $command
-     * @return \App\SmartHome\Exchange\Concern\Contracts\ExchangeInterface
+     * @return \Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface
      */
     public function handle(CreateExchangeCommand $command)
     {
