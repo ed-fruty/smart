@@ -177,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
+        Fruty\SmartHome\Common\Providers\CommonServiceProvider::class,
         Fruty\SmartHome\Exchange\App\Providers\ExchangeServiceProvider::class
 
     ],
