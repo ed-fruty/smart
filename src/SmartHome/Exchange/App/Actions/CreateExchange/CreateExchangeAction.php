@@ -1,5 +1,5 @@
 <?php
-namespace Fruty\SmartHome\Exchange\App\Actions\StoreExchange;
+namespace Fruty\SmartHome\Exchange\App\Actions\CreateExchange;
 
 use Fruty\SmartHome\Common\CommandBus\Contracts\CommandBusAwareInterface;
 use Fruty\SmartHome\Common\CommandBus\Traits\CommandBusAware;
@@ -12,6 +12,8 @@ use Fruty\SmartHome\Exchange\Concern\Commands\CreateExchangeCommand;
 class CreateExchangeAction implements CommandBusAwareInterface
 {
     use CommandBusAware;
+
+    public const ROUTE_NAME = 'exchange.store';
 
     /**
      * @param CreateExchangeRequest $request

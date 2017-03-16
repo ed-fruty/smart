@@ -1,18 +1,28 @@
 <?php
 namespace Fruty\SmartHome\Exchange\App\Actions\GetExchangeList;
 
-use Fruty\SmartHome\Common\View\Contracts\ViewFactoryAwareInterface;
-use Fruty\SmartHome\Common\View\Traits\ViewFactoryAware;
+use Fruty\SmartHome\Common\Http\Response\ResponseBuilder;
+use Fruty\SmartHome\Exchange\App\Transformers\ExchangeResourceTransformer;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
-class GetExchangeListResponder implements ViewFactoryAwareInterface
+class GetExchangeListResponder
 {
-    use ViewFactoryAware;
 
     const VIEW_NAME = 'exchange.index';
+    /**
+     * @var ResponseBuilder
+     */
+    private $responseBuilder;
+
+    /**
+     * GetExchangeListResponder constructor.
+     * @param ResponseBuilder $responseBuilder
+     */
+    public function __construct(ResponseBuilder $responseBuilder)
+    {
+        $this->responseBuilder = $responseBuilder;
+    }
 
     /**
      * @param Collection $collection
@@ -20,17 +30,10 @@ class GetExchangeListResponder implements ViewFactoryAwareInterface
      */
     public function getResponse($collection)
     {
-        return $this->whenAjax(
-            $collection, 
-            $this->viewFactory->make(self::VIEW_NAME, compact('collection'))
-        );
-    }
-
-    private function whenAjax($ajax, $notAjax, $isRedirect = false)
-    {
-        return request()->ajax()
-            ?   new JsonResponse($ajax)
-            :   ($isRedirect ? new RedirectResponse($notAjax) : new Response($notAjax))
-        ;    
+        return $this->responseBuilder
+            ->json($collection, new ExchangeResourceTransformer)
+            ->template(self::VIEW_NAME, compact('collection'))
+            ->build()
+            ;
     }
 }

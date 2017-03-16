@@ -1,5 +1,5 @@
 <?php
-namespace Fruty\SmartHome\Exchange\App\Actions\StoreExchange;
+namespace Fruty\SmartHome\Exchange\App\Actions\CreateExchange;
 
 class CreateExchangeRequest
 {

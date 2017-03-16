@@ -16,6 +16,8 @@ class DeleteExchangeAction implements CommandBusAwareInterface
 {
     use CommandBusAware;
 
+    public const ROUTE_NAME = 'exchange.delete';
+
     /**
      * @param DeleteExchangeRequest $request
      * @param DeleteExchangeResponder $responder

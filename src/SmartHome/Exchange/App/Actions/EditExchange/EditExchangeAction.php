@@ -11,6 +11,8 @@ class EditExchangeAction implements ExchangeRepositoryAwareInterface
 {
     use ExchangeRepositoryAware;
 
+    public const ROUTE_NAME = 'exchange.edit';
+
     /**
      * @param EditExchangeRequest $request
      * @param EditExchangeResponder $responder

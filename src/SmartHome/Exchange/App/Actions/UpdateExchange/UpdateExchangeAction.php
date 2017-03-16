@@ -12,6 +12,8 @@ class UpdateExchangeAction implements CommandBusAwareInterface
 {
     use CommandBusAware;
 
+    public const ROUTE_NAME = 'exchange.update';
+
     /**
      * @param UpdateExchangeRequest $request
      * @param UpdateExchangeResponder $responder

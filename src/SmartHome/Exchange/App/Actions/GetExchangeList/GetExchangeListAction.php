@@ -16,7 +16,7 @@ class GetExchangeListAction implements ExchangeRepositoryAwareInterface
      */
     public function __invoke(GetExchangeListResponder $responder)
     {
-        $collection = $this->exchangeRepository->matches();
+        $collection = collect([]);// $this->exchangeRepository->matches();
 
         return $responder->getResponse($collection);
     }
