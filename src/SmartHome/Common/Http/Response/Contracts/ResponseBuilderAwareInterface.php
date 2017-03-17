@@ -1,5 +1,5 @@
 <?php
-namespace src\SmartHome\Common\Http\Response\Contracts;
+namespace Fruty\SmartHome\Common\Http\Response\Contracts;
 
 use Fruty\SmartHome\Common\Http\Response\ResponseBuilder;
 

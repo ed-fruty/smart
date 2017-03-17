@@ -1,13 +1,12 @@
 <?php
 namespace Fruty\SmartHome\Exchange\App\Actions\CreateExchange;
 
-use Fruty\SmartHome\Common\Http\Redirect\Aware\RedirectAware;
 use Fruty\SmartHome\Exchange\App\Transformers\ExchangeResourceTransformer;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use src\SmartHome\Common\Http\Response\Contracts\ResponseBuilderAwareInterface;
-use src\SmartHome\Common\Http\Response\Traits\ResponseBuilderAware;
+use Fruty\SmartHome\Common\Http\Response\Contracts\ResponseBuilderAwareInterface;
+use Fruty\SmartHome\Common\Http\Response\Traits\ResponseBuilderAware;
 
 class CreateExchangeResponder implements ResponseBuilderAwareInterface
 {

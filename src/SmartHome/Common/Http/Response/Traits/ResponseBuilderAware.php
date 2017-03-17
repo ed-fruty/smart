@@ -1,5 +1,5 @@
 <?php
-namespace src\SmartHome\Common\Http\Response\Traits;
+namespace Fruty\SmartHome\Common\Http\Response\Traits;
 
 use Fruty\SmartHome\Common\Http\Response\ResponseBuilder;
 

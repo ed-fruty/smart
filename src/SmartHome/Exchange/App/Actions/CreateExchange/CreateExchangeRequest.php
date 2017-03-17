@@ -1,29 +1,25 @@
 <?php
 namespace Fruty\SmartHome\Exchange\App\Actions\CreateExchange;
 
-class CreateExchangeRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class CreateExchangeRequest extends FormRequest
 {
     /**
-     * @return string
+     * @return array
      */
-    public function getName()
+    public function rules()
     {
-        //TODO
+        return [
+            'name'                  => 'required|string',
+            'connector'             => 'required|string',
+            'dsn'                   => 'string',
+            'status'                => 'required|numeric',
+        ];
     }
 
-    /**
-     * @return int
-     */
-    public function getTypeId()
+    public function authorize()
     {
-        // TODO
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatus()
-    {
-        // TODO
+        return true;
     }
 }

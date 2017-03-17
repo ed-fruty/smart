@@ -2,6 +2,7 @@
 namespace Fruty\SmartHome\Exchange\Infrastructure\Eloquent;
 
 use Fruty\SmartHome\Common\Status\Status;
+use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeTypeInterface;
 use Fruty\SmartHome\Exchange\Concern\Types\Manager as ExchangeTypeManager;
@@ -61,5 +62,15 @@ final class Exchange extends Model implements ExchangeInterface
     public function getId(): ExchangeId
     {
         // TODO: Implement getId() method.
+    }
+
+    public function getConnector(): ConnectorInterface
+    {
+        // TODO: Implement getConnector() method.
+    }
+
+    public function getDsn(): string
+    {
+        // TODO: Implement getDsn() method.
     }
 }

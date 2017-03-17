@@ -9,7 +9,7 @@ class GetCreateExchangeFormResponder implements ViewFactoryAwareInterface
 {
     use ViewFactoryAware;
 
-    private const VIEW_NAME = 'exchange.create';
+    public const VIEW_NAME = 'exchange.create';
 
     /**
      * @return Response

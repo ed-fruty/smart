@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Hello',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Fruty\SmartHome\Common\Providers\CommonServiceProvider::class,
+        Fruty\SmartHome\Common\Providers\ViewComposersServiceProvider::class,
+
         Fruty\SmartHome\Exchange\App\Providers\ExchangeServiceProvider::class
 
     ],
