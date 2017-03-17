@@ -23,7 +23,7 @@ class ExchangeModelFactory implements ExchangeModelFactoryInterface
      */
     public function hydrate(array $attributes = []): ExchangeInterface
     {
-        return (new Exchange([], true))->forceFill($attributes);
+        return (new Exchange)->forceFill($attributes);
     }
 
     /**
@@ -33,6 +33,6 @@ class ExchangeModelFactory implements ExchangeModelFactoryInterface
     public function createWriteExchange(ExchangeInterface $exchange): WriteExchangeInterface
     {
         /** @var Exchange $exchange */
-        return (new WriteExchange([], true))->forceFill($exchange->toArray());
+        return new WriteExchange($exchange, $exchange->toArray());
     }
 }

@@ -14,7 +14,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\ServiceProvider;
 use src\SmartHome\Common\Http\Response\Contracts\ResponseBuilderAwareInterface;
 
-class CommonServiceProvider extends ServiceProvider
+class AwareServiceProvider extends ServiceProvider
 {
 
     protected function getAwares()

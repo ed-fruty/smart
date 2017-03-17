@@ -2,70 +2,82 @@
 namespace Fruty\SmartHome\Exchange\Infrastructure\Eloquent;
 
 use Fruty\SmartHome\Common\Status\Status;
+use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
-use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeTypeInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\WriteExchangeInterface;
-use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
-class WriteExchange extends Model implements WriteExchangeInterface
+/**
+ * Class WriteExchange
+ * @package Fruty\SmartHome\Exchange\Infrastructure\Eloquent
+ */
+class WriteExchange extends Exchange implements WriteExchangeInterface
 {
+    /**
+     * @var Exchange
+     */
+    private $exchange;
 
     /**
-     * @return ExchangeId
+     * WriteExchange constructor.
+     * @param array $attributes
+     * @param Exchange $exchange
      */
-    public function getId(): ExchangeId
+    public function __construct(Exchange $exchange, array $attributes = [])
     {
-        // TODO: Implement getId() method.
-    }
+        $this->exchange = $exchange;
 
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        // TODO: Implement getName() method.
-    }
-
-    /**
-     * @return ExchangeTypeInterface
-     */
-    public function getType(): ExchangeTypeInterface
-    {
-        // TODO: Implement getType() method.
+        parent::__construct($attributes);
     }
 
     /**
-     * @return Status
+     * @param string $name
+     * @return WriteExchangeInterface
      */
-    public function getStatus(): Status
+    public function setName(string $name) : WriteExchangeInterface
     {
-        // TODO: Implement getStatus() method.
+        $this->exchange->setAttribute('name', $name);
+
+        return $this;
     }
 
     /**
-     * Get devices collection.
-     *
-     * @return Collection
+     * @param Status $status
+     * @return WriteExchangeInterface
      */
-    public function getDevices(): Collection
+    public function setStatus(Status $status) : WriteExchangeInterface
     {
-        // TODO: Implement getDevices() method.
+        $this->exchange->setAttribute('status', $status->getValue());
+
+        return $this;
     }
 
-    public function setName(string $name)
-    {
-        // TODO: Implement setName() method.
-    }
-
-    public function setStatus(Status $status)
-    {
-        // TODO: Implement setStatus() method.
-    }
-
+    /**
+     * @return ExchangeInterface
+     */
     public function getReadExchange(): ExchangeInterface
     {
-        // TODO: Implement getReadExchange() method.
+        return $this->exchange;
+    }
+
+    /**
+     * @param string $dsn
+     * @return WriteExchangeInterface
+     */
+    public function setDsn(string $dsn): WriteExchangeInterface
+    {
+        $this->exchange->setAttribute('dsn', $dsn);
+
+        return $this;
+    }
+
+    /**
+     * @param ConnectorInterface $connector
+     * @return WriteExchangeInterface
+     */
+    public function setConnector(ConnectorInterface $connector): WriteExchangeInterface
+    {
+        $this->exchange->setAttribute('connector_name', $connector->getName());
+
+        return $this;
     }
 }

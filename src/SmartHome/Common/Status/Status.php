@@ -55,14 +55,12 @@ class Status
         ];
     }
 
+    /**
+     * @param $value
+     * @return static
+     */
     public function fromValue($value)
     {
-        $list = $this->dropDown();
-
-        if (! isset($list[$value])) {
-            throw new \InvalidArgumentException("Unknown status value");
-        }
-
         return new static($value);
     }
 }

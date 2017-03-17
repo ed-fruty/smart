@@ -17,9 +17,14 @@ interface ExchangeInterface
      */
     public function getName() : string;
 
+    /**
+     * @return string
+     */
+    public function getConnectorName() : string;
 
-    public function getConnector() : ConnectorInterface;
-
+    /**
+     * @return string
+     */
     public function getDsn() : string;
 
     /**

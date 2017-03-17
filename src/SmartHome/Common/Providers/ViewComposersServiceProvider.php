@@ -1,7 +1,7 @@
 <?php
 namespace Fruty\SmartHome\Common\Providers;
 
-use Fruty\SmartHome\Common\View\Composers\ExchangeConnectionTypesViewComposer;
+use Fruty\SmartHome\Common\View\Composers\ExchangeConnectorsViewComposer;
 use Fruty\SmartHome\Common\View\Composers\StatusViewComposer;
 use Fruty\SmartHome\Exchange\App\Actions\EditExchange\EditExchangeResponder;
 use Fruty\SmartHome\Exchange\App\Actions\GetCreateExchangeForm\GetCreateExchangeFormResponder;
@@ -35,7 +35,7 @@ class ViewComposersServiceProvider extends ServiceProvider
         view()->composer([
             GetCreateExchangeFormResponder::VIEW_NAME,
 
-        ], ExchangeConnectionTypesViewComposer::class);
+        ], ExchangeConnectorsViewComposer::class);
     }
 
 }

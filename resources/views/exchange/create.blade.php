@@ -29,8 +29,10 @@
             <label for="connector" class="col-md-2 control-label">Connection type</label>
             <div class="col-md-9">
                 <select name="connector" id="connector" class="form-control">
-                    @foreach($exchangeConnectorAggregate->getConnectors() as $value => $name)
-                        <option value="{{ $value }}" {{ old('connector') === $value ? 'selected' : '' }} >{{ $name }}</option>
+                    @foreach($exchangeConnectorAggregate->getConnectors() as $connector)
+                        <option value="{{ $connector->getName() }}"
+                                {{ old('connector') === $connector->getName() ? 'selected' : '' }}
+                        >{{ $connector->getName() }}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('connector'))

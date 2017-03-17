@@ -1,6 +1,8 @@
 <?php
 namespace Fruty\SmartHome\Exchange\App\Providers;
 
+use Fruty\SmartHome\Exchange\Concern\Connections\ConnectorAggregate;
+use Fruty\SmartHome\Exchange\Concern\Connections\Virtual\VirtualConnector;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeRepositoryAwareInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeRepositoryInterface;
 use Fruty\SmartHome\Exchange\Infrastructure\Eloquent\ExchangeRepository;
@@ -12,6 +14,10 @@ class ExchangeServiceProvider extends ServiceProvider
     {
         $this->app->bind(ExchangeRepositoryInterface::class, ExchangeRepository::class);
         $this->app->afterResolving(ExchangeRepositoryAwareInterface::class, $this->getRepositoryAwareCallback());
+
+        $this->app->afterResolving(ConnectorAggregate::class, function(ConnectorAggregate $aggregate) {
+            $aggregate->register(new VirtualConnector);
+        });
     }
 
     /**

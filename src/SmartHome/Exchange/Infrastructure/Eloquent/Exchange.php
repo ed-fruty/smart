@@ -2,23 +2,21 @@
 namespace Fruty\SmartHome\Exchange\Infrastructure\Eloquent;
 
 use Fruty\SmartHome\Common\Status\Status;
-use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
-use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeTypeInterface;
-use Fruty\SmartHome\Exchange\Concern\Types\Manager as ExchangeTypeManager;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
-use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeTypeId;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-final class Exchange extends Model implements ExchangeInterface
+class Exchange extends Model implements ExchangeInterface
 {
     private const ATTRIBUTE_ID = 'id';
     private const ATTRIBUTE_NAME = 'name';
     private const ATTRIBUTE_STATUS = 'status';
-    private const ATTRIBUTE_TYPE_ID = 'type_id';
+    private const ATTRIBUTE_CONNECTOR_NAME = 'connector_name';
+    private const ATTRIBUTE_DSN = 'dsn';
 
     private const RELATION_DEVICES = 'devices';
+
 
     /**
      * @return string
@@ -26,16 +24,6 @@ final class Exchange extends Model implements ExchangeInterface
     public function getName(): string
     {
         return $this->getAttribute(self::ATTRIBUTE_NAME);
-    }
-
-    /**
-     * @return ExchangeTypeInterface
-     */
-    public function getType(): ExchangeTypeInterface
-    {
-        $id = new ExchangeTypeId($this->getAttribute(self::ATTRIBUTE_TYPE_ID));
-
-        return app(ExchangeTypeManager::class)->find($id);
     }
 
     /**
@@ -61,16 +49,22 @@ final class Exchange extends Model implements ExchangeInterface
      */
     public function getId(): ExchangeId
     {
-        // TODO: Implement getId() method.
+        return new ExchangeId($this->getAttribute(self::ATTRIBUTE_ID));
     }
 
-    public function getConnector(): ConnectorInterface
-    {
-        // TODO: Implement getConnector() method.
-    }
-
+    /**
+     * @return string
+     */
     public function getDsn(): string
     {
-        // TODO: Implement getDsn() method.
+        return $this->getAttribute(self::ATTRIBUTE_DSN);
+    }
+
+    /**
+     * @return string
+     */
+    public function getConnectorName(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_CONNECTOR_NAME);
     }
 }
