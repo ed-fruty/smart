@@ -1,6 +1,7 @@
 <?php
 namespace Fruty\SmartHome\Exchange\Infrastructure\Eloquent;
 
+use Carbon\Carbon;
 use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
@@ -14,6 +15,8 @@ class Exchange extends Model implements ExchangeInterface
     private const ATTRIBUTE_STATUS = 'status';
     private const ATTRIBUTE_CONNECTOR_NAME = 'connector_name';
     private const ATTRIBUTE_DSN = 'dsn';
+    private const ATTRIBUTE_CREATED_AT = 'created_at';
+    private const ATTRIBUTE_UPDATED_AT = 'updated_at';
 
     private const RELATION_DEVICES = 'devices';
 
@@ -66,5 +69,21 @@ class Exchange extends Model implements ExchangeInterface
     public function getConnectorName(): string
     {
         return $this->getAttribute(self::ATTRIBUTE_CONNECTOR_NAME);
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getCreatedAt(): Carbon
+    {
+        return $this->getAttribute(self::ATTRIBUTE_CREATED_AT);
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getUpdatedAt(): Carbon
+    {
+        return $this->getAttribute(self::ATTRIBUTE_UPDATED_AT);
     }
 }

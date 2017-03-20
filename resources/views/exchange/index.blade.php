@@ -12,13 +12,13 @@
             No exchanges was found.
         </div>
     @else
-        <table>
+        <table class="table table-responsive table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Status</th>
-                    <th>Type</th>
+                    <th>Connector</th>
                     <th>Created</th>
                     <th>Updated</th>
                     <th>Actions</th>
@@ -29,15 +29,17 @@
                     <tr>
                         <td> {{ $exchange->getId() }}</td>
                         <td> {{ $exchange->getName() }}</td>
-                        <td> {{ $exchange->getStatus() }}</td>
-                        <td> {{ $exchange->getType()->getName() }}</td>
+                        <td> {{ $exchange->getStatus()->getName() }}</td>
+                        <td> {{ $exchange->getConnectorName() }}</td>
                         <td> {{ $exchange->getCreatedAt() }}</td>
                         <td> {{ $exchange->getUpdatedAt() }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="#" class="btn btn-default">Edit</a>
-                                <a href="#" class="btn btn-default">Devices</a>
-                                <a href="#" class="btn btn-default">Delete</a>
+                                <a href="{{ route('exchange.edit', $exchange->getId()->getId())  }}" class="btn btn-warning">Edit</a>
+                                <a href="#" class="btn btn-info">Devices</a>
+                                <form action="{{ route('exchange.delete', $exchange->getId()->getId()) }}">
+
+                                </form>
                             </div>
                         </td>
                     </tr>

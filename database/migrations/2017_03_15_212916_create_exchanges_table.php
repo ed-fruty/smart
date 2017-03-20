@@ -16,7 +16,8 @@ class CreateExchangesTable extends Migration
         Schema::create('exchanges', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('type_id');
+            $table->integer('connector_name');
+            $table->string('dsn');
             $table->tinyInteger('status');
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 <?php
 namespace Fruty\SmartHome\Exchange\Concern\Contracts;
 
+use Carbon\Carbon;
 use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
 use Illuminate\Database\Eloquent\Collection;
@@ -38,4 +39,14 @@ interface ExchangeInterface
      * @return Collection
      */
     public function getDevices() : Collection;
+
+    /**
+     * @return Carbon
+     */
+    public function getCreatedAt() : Carbon;
+
+    /**
+     * @return Carbon
+     */
+    public function getUpdatedAt() : Carbon;
 }

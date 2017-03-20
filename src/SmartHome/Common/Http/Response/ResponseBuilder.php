@@ -73,10 +73,13 @@ class ResponseBuilder implements RedirectAwareInterface, ViewFactoryAwareInterfa
      *
      * @param string|callable $redirect
      * @param string $type
+     * @return $this
      */
     public function redirect($redirect, $type = self::REDIRECT_TYPE_ROUTE)
     {
         $this->redirectData = compact('redirect', 'type');
+
+        return $this;
     }
 
     /**

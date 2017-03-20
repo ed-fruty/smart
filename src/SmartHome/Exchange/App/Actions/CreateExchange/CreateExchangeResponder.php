@@ -22,6 +22,7 @@ class CreateExchangeResponder implements ResponseBuilderAwareInterface
     {
         return $this->responseBuilder
             ->json($exchange, new ExchangeResourceTransformer)
-            ->redirect(self::REDIRECT_ROUTE);
+            ->redirect(self::REDIRECT_ROUTE)
+            ->build();
     }
 }
