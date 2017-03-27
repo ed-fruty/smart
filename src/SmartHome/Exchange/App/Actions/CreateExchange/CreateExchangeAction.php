@@ -6,6 +6,7 @@ use Fruty\SmartHome\Common\CommandBus\Traits\CommandBusAware;
 use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Commands\CreateExchangeCommand;
 use Fruty\SmartHome\Exchange\Concern\Connections\ConnectorAggregate;
+use Fruty\SmartHome\Exchange\Concern\ValueObjects\Dsn;
 
 /**
  * Class StoreExchangeAction
@@ -54,7 +55,7 @@ class CreateExchangeAction implements CommandBusAwareInterface
         return new CreateExchangeCommand(
             (string) $request->get('name'),
             $this->connectorAggregate->get($request->get('connector')),
-            (string) $request->get('dsn'),
+            new Dsn($request->get('dsn')),
             new Status($request->get('status'))
         );
     }

@@ -1,6 +1,9 @@
 <?php
 namespace Fruty\SmartHome\Exchange\Concern\Commands;
 
+use Fruty\SmartHome\Common\Status\Status;
+use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
+use Fruty\SmartHome\Exchange\Concern\ValueObjects\Dsn;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
 
 final class UpdateExchangeCommand
@@ -10,11 +13,7 @@ final class UpdateExchangeCommand
      */
     private $name;
     /**
-     * @var int
-     */
-    private $typeId;
-    /**
-     * @var int
+     * @var Status
      */
     private $status;
 
@@ -24,18 +23,29 @@ final class UpdateExchangeCommand
     private $exchangeId;
 
     /**
+     * @var Dsn
+     */
+    private $dsn;
+
+    /**
+     * @var ConnectorInterface
+     */
+    private $connector;
+
+    /**
      * UpdateExchangeCommand constructor.
      * @param ExchangeId $exchangeId
      * @param string $name
-     * @param int $typeId
-     * @param int $status
+     * @param Dsn $dsn
+     * @param Status|int $status
      */
-    public function __construct(ExchangeId $exchangeId, string $name, int $typeId, int $status)
+    public function __construct(ExchangeId $exchangeId, string $name, ConnectorInterface $connector, Dsn $dsn, Status $status)
     {
         $this->name = $name;
-        $this->typeId = $typeId;
         $this->status = $status;
         $this->exchangeId = $exchangeId;
+        $this->dsn = $dsn;
+        $this->connector = $connector;
     }
 
     /**
@@ -47,13 +57,8 @@ final class UpdateExchangeCommand
     }
 
     /**
-     * @return int
+     * @return Status
      */
-    public function getTypeId(): int
-    {
-        return $this->typeId;
-    }
-
     public function getStatus()
     {
         return $this->status;
@@ -65,5 +70,21 @@ final class UpdateExchangeCommand
     public function getExchangeId(): ExchangeId
     {
         return $this->exchangeId;
+    }
+
+    /**
+     * @return Dsn
+     */
+    public function getDsn(): Dsn
+    {
+        return $this->dsn;
+    }
+
+    /**
+     * @return ConnectorInterface
+     */
+    public function getConnector(): ConnectorInterface
+    {
+        return $this->connector;
     }
 }

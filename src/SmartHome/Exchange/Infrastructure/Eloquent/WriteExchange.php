@@ -5,6 +5,7 @@ use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\WriteExchangeInterface;
+use Fruty\SmartHome\Exchange\Concern\ValueObjects\Dsn;
 
 /**
  * Class WriteExchange
@@ -26,7 +27,7 @@ class WriteExchange extends Exchange implements WriteExchangeInterface
     {
         $this->exchange = $exchange;
 
-        parent::__construct($attributes);
+        //parent::__construct($attributes);
     }
 
     /**
@@ -60,12 +61,12 @@ class WriteExchange extends Exchange implements WriteExchangeInterface
     }
 
     /**
-     * @param string $dsn
+     * @param Dsn $dsn
      * @return WriteExchangeInterface
      */
-    public function setDsn(string $dsn): WriteExchangeInterface
+    public function setDsn(Dsn $dsn): WriteExchangeInterface
     {
-        $this->exchange->setAttribute('dsn', $dsn);
+        $this->exchange->setAttribute('dsn', $dsn->getValue());
 
         return $this;
     }

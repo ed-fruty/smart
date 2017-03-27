@@ -3,6 +3,7 @@ namespace Fruty\SmartHome\Exchange\Concern\Commands;
 
 use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
+use Fruty\SmartHome\Exchange\Concern\ValueObjects\Dsn;
 
 class CreateExchangeCommand
 {
@@ -28,10 +29,10 @@ class CreateExchangeCommand
      * CreateExchangeCommand constructor.
      * @param string $name
      * @param ConnectorInterface $connector
-     * @param string $dsn
+     * @param Dsn $dsn
      * @param Status $status
      */
-    public function __construct(string $name, ConnectorInterface $connector, string $dsn, Status $status)
+    public function __construct(string $name, ConnectorInterface $connector, Dsn $dsn, Status $status)
     {
         $this->name = $name;
         $this->status = $status;
@@ -56,9 +57,9 @@ class CreateExchangeCommand
     }
 
     /**
-     * @return string
+     * @return Dsn
      */
-    public function getDsn(): string
+    public function getDsn(): Dsn
     {
         return $this->dsn;
     }

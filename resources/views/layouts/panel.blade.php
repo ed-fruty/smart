@@ -79,6 +79,15 @@
     </nav>
 
     <div class="container">
+        @if ($message = session()->get('flash.message'))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-{{ session()->get('flash.level') }}">
+                        {{ $message }}
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">

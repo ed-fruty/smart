@@ -4,6 +4,7 @@ namespace Fruty\SmartHome\Exchange\Infrastructure\Eloquent;
 use Carbon\Carbon;
 use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
+use Fruty\SmartHome\Exchange\Concern\ValueObjects\Dsn;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -56,11 +57,11 @@ class Exchange extends Model implements ExchangeInterface
     }
 
     /**
-     * @return string
+     * @return Dsn
      */
-    public function getDsn(): string
+    public function getDsn(): Dsn
     {
-        return $this->getAttribute(self::ATTRIBUTE_DSN);
+        return new Dsn($this->getAttribute(self::ATTRIBUTE_DSN));
     }
 
     /**

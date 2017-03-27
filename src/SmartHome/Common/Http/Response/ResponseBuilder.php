@@ -24,6 +24,15 @@ class ResponseBuilder implements RedirectAwareInterface, ViewFactoryAwareInterfa
     const REDIRECT_TYPE_ACTION = 'action';
     const REDIRECT_TYPE_URL = 'url';
 
+    public const FORCE_AJAX = 'ajax';
+    public const FORCE_REDIRECT = 'redirect';
+    public const FORCE_VIEW = 'view';
+
+    public const FLASH_LEVEL_INFO = 'info';
+    public const FLASH_LEVEL_WARNING = 'warning';
+    public const FLASH_LEVEL_DANGER = 'danger';
+    public const FLASH_LEVEL_SUCCESS = 'success';
+
     /**
      * @var mixed|array|callable|string
      */
@@ -38,6 +47,11 @@ class ResponseBuilder implements RedirectAwareInterface, ViewFactoryAwareInterfa
      * @var array
      */
     private $redirectData;
+
+    /**
+     * @var
+     */
+    private $flash = [];
 
 
     /**
@@ -83,14 +97,56 @@ class ResponseBuilder implements RedirectAwareInterface, ViewFactoryAwareInterfa
     }
 
     /**
+     * @param $message
+     * @param string $level
+     * @param array $params
+     * @return $this
+     */
+    public function flash($message, $level = self::FLASH_LEVEL_INFO, array $params = [])
+    {
+        $this->flash = compact('message', 'level', 'params');
+
+        return $this;
+    }
+
+    /**
+     * @param int $force
      * @return JsonResponse|RedirectResponse|Response
      */
-    public function build()
+    public function build($force = null)
     {
-        return request()->ajax()
-            ?   $this->getAjaxResponse()
-            :   ($this->redirectData    ?   $this->getRedirectResponse()    :   $this->getViewResponse())
-            ;
+        if (! $force) {
+            if (request()->ajax()) {
+                $force = static::FORCE_AJAX;
+            } else {
+                $force = $this->redirectData ? static::FORCE_REDIRECT : static::FORCE_VIEW;
+            }
+        }
+
+        switch ($force) {
+            case static::FORCE_AJAX:
+                return $this->getAjaxResponse();
+            case static::FORCE_REDIRECT:
+                $this->setFlashes();
+                return $this->getRedirectResponse();
+            case static::FORCE_VIEW:
+                $this->setFlashes();
+                return $this->getViewResponse();
+
+            default:
+                throw new \RuntimeException(sprintf("Undefined build option %s", $force));
+        }
+    }
+
+    /**
+     *
+     */
+    private function setFlashes()
+    {
+        if ($this->flash) {
+            session()->flash('flash.message', trans($this->flash['message'], $this->flash['params']));
+            session()->flash('flash.level', $this->flash['level']);
+        }
     }
 
     /**

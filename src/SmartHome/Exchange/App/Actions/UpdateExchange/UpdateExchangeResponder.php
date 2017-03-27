@@ -3,11 +3,14 @@ namespace Fruty\SmartHome\Exchange\App\Actions\UpdateExchange;
 
 use Fruty\SmartHome\Common\Http\Redirect\Aware\RedirectAware;
 use Fruty\SmartHome\Common\Http\Redirect\Contracts\RedirectAwareInterface;
+use Fruty\SmartHome\Common\Http\Response\Contracts\ResponseBuilderAwareInterface;
+use Fruty\SmartHome\Common\Http\Response\Traits\ResponseBuilderAware;
+use Fruty\SmartHome\Exchange\App\Transformers\ExchangeResourceTransformer;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 
-class UpdateExchangeResponder implements RedirectAwareInterface
+class UpdateExchangeResponder implements ResponseBuilderAwareInterface
 {
-    use RedirectAware;
+    use ResponseBuilderAware;
 
     private const REDIRECT_ROUTE = 'exchange.index';
 
@@ -17,6 +20,10 @@ class UpdateExchangeResponder implements RedirectAwareInterface
      */
     public function getResponse(ExchangeInterface $exchange)
     {
-        return $this->redirect->route(self::REDIRECT_ROUTE);
+        return $this->responseBuilder
+            ->json($exchange, new ExchangeResourceTransformer)
+            ->redirect('exchange.index')
+            ->flash('Exchange was updated.')
+            ->build();
     }
 }
