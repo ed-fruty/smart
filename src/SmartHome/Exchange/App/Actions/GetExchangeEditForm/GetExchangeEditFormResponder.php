@@ -1,13 +1,12 @@
 <?php
-namespace Fruty\SmartHome\Exchange\App\Actions\EditExchange;
+namespace Fruty\SmartHome\Exchange\App\Actions\GetExchangeEditForm;
 
 use Fruty\SmartHome\Common\View\Contracts\ViewFactoryAwareInterface;
 use Fruty\SmartHome\Common\View\Traits\ViewFactoryAware;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 
-class EditExchangeResponder implements ViewFactoryAwareInterface
+class GetExchangeEditFormResponder implements ViewFactoryAwareInterface
 {
     use ViewFactoryAware;
 
@@ -17,12 +16,8 @@ class EditExchangeResponder implements ViewFactoryAwareInterface
      * @param ExchangeInterface|null $exchange
      * @return Response
      */
-    public function getResponse($exchange)
+    public function getResponse(ExchangeInterface $exchange)
     {
-        if (! $exchange) {
-            throw new ModelNotFoundException("Exchange was not found");
-        }
-
         return new Response(
               $this->viewFactory->make(self::VIEW_NAME, compact('exchange'))
         );

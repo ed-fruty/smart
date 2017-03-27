@@ -5,6 +5,7 @@ use Fruty\SmartHome\Common\View\Composers\ExchangeConnectorsViewComposer;
 use Fruty\SmartHome\Common\View\Composers\StatusViewComposer;
 use Fruty\SmartHome\Exchange\App\Actions\EditExchange\EditExchangeResponder;
 use Fruty\SmartHome\Exchange\App\Actions\GetCreateExchangeForm\GetCreateExchangeFormResponder;
+use Fruty\SmartHome\Exchange\App\Actions\GetExchangeEditForm\GetExchangeEditFormResponder;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposersServiceProvider extends ServiceProvider
@@ -22,7 +23,7 @@ class ViewComposersServiceProvider extends ServiceProvider
     {
         view()->composer([
             GetCreateExchangeFormResponder::VIEW_NAME,
-            EditExchangeResponder::VIEW_NAME,
+            GetExchangeEditFormResponder::VIEW_NAME,
 
         ], StatusViewComposer::class);
     }
@@ -34,6 +35,7 @@ class ViewComposersServiceProvider extends ServiceProvider
     {
         view()->composer([
             GetCreateExchangeFormResponder::VIEW_NAME,
+            GetExchangeEditFormResponder::VIEW_NAME,
 
         ], ExchangeConnectorsViewComposer::class);
     }

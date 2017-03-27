@@ -1,8 +1,8 @@
 <?php
 use Fruty\SmartHome\Exchange\App\Actions\CreateExchange\CreateExchangeAction;
 use Fruty\SmartHome\Exchange\App\Actions\DeleteExchange\DeleteExchangeAction;
-use Fruty\SmartHome\Exchange\App\Actions\EditExchange\EditExchangeAction;
 use Fruty\SmartHome\Exchange\App\Actions\GetCreateExchangeForm\GetCreateExchangeFormAction;
+use Fruty\SmartHome\Exchange\App\Actions\GetExchangeEditForm\GetExchangeEditFormAction;
 use Fruty\SmartHome\Exchange\App\Actions\GetExchangeList\GetExchangeListAction;
 
 use Fruty\SmartHome\Exchange\App\Actions\UpdateExchange\UpdateExchangeAction;
@@ -25,8 +25,8 @@ $router->group(['prefix' => 'exchange'], function(Router $router) {
         ->name(CreateExchangeAction::ROUTE_NAME);
 
     $router->get('edit/{exchangeId}')
-        ->uses(EditExchangeAction::class)
-        ->name(EditExchangeAction::ROUTE_NAME);
+        ->uses(GetExchangeEditFormAction::class)
+        ->name(GetExchangeEditFormAction::ROUTE_NAME);
 
     $router->patch('update/{exchangeId}')
         ->uses(UpdateExchangeAction::class)

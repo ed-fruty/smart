@@ -13,7 +13,7 @@ final class ExchangeConnectorsViewComposer
 
     /**
      * ExchangeConnectionTypesViewComposer constructor.
-     * @param ConnectorAggregate $connectionTypesList
+     * @param ConnectorAggregate $connectorAggregate
      */
     public function __construct(ConnectorAggregate $connectorAggregate)
     {
