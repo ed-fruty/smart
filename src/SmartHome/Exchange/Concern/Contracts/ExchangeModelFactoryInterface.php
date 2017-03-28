@@ -4,16 +4,9 @@ namespace Fruty\SmartHome\Exchange\Concern\Contracts;
 interface ExchangeModelFactoryInterface
 {
     /**
-     * @param array $attributes
      * @return ExchangeInterface
      */
-    public function createReadExchange(array $attributes = []) : ExchangeInterface;
-
-    /**
-     * @param array $attributes
-     * @return ExchangeInterface
-     */
-    public function hydrate(array $attributes = []) : ExchangeInterface;
+    public function createReadExchange() : ExchangeInterface;
 
     /**
      * @param ExchangeInterface $exchange

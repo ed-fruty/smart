@@ -9,21 +9,11 @@ use Fruty\SmartHome\Exchange\Infrastructure\Eloquent\WriteExchange;
 class ExchangeModelFactory implements ExchangeModelFactoryInterface
 {
     /**
-     * @param array $attributes
      * @return ExchangeInterface
      */
-    public function createReadExchange(array $attributes = []): ExchangeInterface
+    public function createReadExchange(): ExchangeInterface
     {
-        return new Exchange($attributes);
-    }
-
-    /**
-     * @param array $attributes
-     * @return ExchangeInterface
-     */
-    public function hydrate(array $attributes = []): ExchangeInterface
-    {
-        return (new Exchange)->forceFill($attributes);
+        return new Exchange();
     }
 
     /**
@@ -33,6 +23,6 @@ class ExchangeModelFactory implements ExchangeModelFactoryInterface
     public function createWriteExchange(ExchangeInterface $exchange): WriteExchangeInterface
     {
         /** @var Exchange $exchange */
-        return new WriteExchange($exchange, $exchange->toArray());
+        return new WriteExchange($exchange);
     }
 }

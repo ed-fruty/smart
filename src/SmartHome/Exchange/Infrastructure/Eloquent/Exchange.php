@@ -45,7 +45,7 @@ class Exchange extends Model implements ExchangeInterface
      */
     public function getDevices(): Collection
     {
-        return $this->getRelation(self::RELATION_DEVICES);
+        return $this->getRelation(self::RELATION_DEVICES) ?: new Collection();
     }
 
     /**
