@@ -5,7 +5,7 @@ use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ConnectorInterface;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\Dsn;
 
-class CreateExchangeCommand
+final class CreateExchangeCommand
 {
 
     /**

@@ -53,7 +53,7 @@ class CreateExchangeAction implements CommandBusAwareInterface
     private function createExchangeCommand(CreateExchangeRequest $request)
     {
         return new CreateExchangeCommand(
-            (string) $request->get('name'),
+            $request->get('name'),
             $this->connectorAggregate->get($request->get('connector')),
             new Dsn($request->get('dsn')),
             new Status($request->get('status'))

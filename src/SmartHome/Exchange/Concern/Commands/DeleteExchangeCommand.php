@@ -3,7 +3,7 @@ namespace Fruty\SmartHome\Exchange\Concern\Commands;
 
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
 
-class DeleteExchangeCommand
+final class DeleteExchangeCommand
 {
     /**
      * @var ExchangeId
