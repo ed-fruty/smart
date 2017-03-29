@@ -8,6 +8,7 @@ use Fruty\SmartHome\Device\Concern\ValueObjects\DeviceId;
 use Fruty\SmartHome\Device\Concern\ValueObjects\DeviceType;
 use Fruty\SmartHome\Device\Concern\ValueObjects\Pin;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 interface DeviceInterface
 {
@@ -66,7 +67,7 @@ interface DeviceInterface
     public function getUpdatedAt() : Carbon;
 
     /**
-     * @return DeviceCommands
+     * @return CommandInterface[]|Collection
      */
-    public function getCommands() : DeviceCommands;
+    public function getCommands();
 }
