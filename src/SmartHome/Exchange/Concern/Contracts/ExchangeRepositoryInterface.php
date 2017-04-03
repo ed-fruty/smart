@@ -1,7 +1,7 @@
 <?php
 namespace Fruty\SmartHome\Exchange\Concern\Contracts;
 
-use Fruty\SmartHome\Common\Specifications\SpecificationInterface;
+use Fruty\SmartHome\Common\Specifications\Contracts\SpecificationInterface;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,7 +26,7 @@ interface ExchangeRepositoryInterface
      * @param SpecificationInterface $specification
      * @return Collection|ExchangeInterface[]|Paginator
      */
-    public function matches(SpecificationInterface $specification = null);
+    public function search(SpecificationInterface $specification = null);
 
 
     /**

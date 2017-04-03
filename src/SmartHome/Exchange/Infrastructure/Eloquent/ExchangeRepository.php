@@ -1,11 +1,13 @@
 <?php
 namespace Fruty\SmartHome\Exchange\Infrastructure\Eloquent;
 
-use Fruty\SmartHome\Common\Specifications\SpecificationInterface;
+use Fruty\SmartHome\Common\Specifications\Contracts\SpecificationInterface;
+use Fruty\SmartHome\Common\Specifications\Traits\EloquentSpecificationResolves;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeModelFactoryInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeRepositoryInterface;
 use Fruty\SmartHome\Exchange\Concern\ValueObjects\ExchangeId;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
@@ -16,6 +18,8 @@ use Illuminate\Support\Collection;
  */
 class ExchangeRepository implements ExchangeRepositoryInterface
 {
+
+    use EloquentSpecificationResolves;
 
     /**
      * @var Exchange
@@ -42,17 +46,11 @@ class ExchangeRepository implements ExchangeRepositoryInterface
 
     /**
      * @param SpecificationInterface $specification
-     * @return Collection|ExchangeInterface[]
+     * @return Collection|ExchangeInterface[]|Paginator
      */
-    public function matches(SpecificationInterface $specification = null)
+    public function search(SpecificationInterface $specification = null)
     {
-        $query = $this->model->newQuery();
-
-        if (! $specification) {
-            return $query->get();
-        }
-
-        return $specification->apply($query) ?: $query->get();
+        return $specification ? $this->searchWithSpecification($specification) : $this->model->newQuery()->get();
     }
 
     /**

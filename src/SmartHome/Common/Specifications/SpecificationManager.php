@@ -27,6 +27,13 @@ class SpecificationManager
         $class = is_object($specification) ? get_class($specification) : $specification;
         $resolver = $this->specifications[$class] ?? null;
 
-        return is_callable($resolver) ? $resolver : app($resolver);
+        if (! $resolver) {
+            throw new \InvalidArgumentException(sprintf(
+                "Specification resolver not found for '%s'",
+                $class
+            ));
+        }
+
+        return is_callable($resolver) ? $resolver : app()->make($resolver);
     }
 }

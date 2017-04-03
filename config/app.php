@@ -180,6 +180,7 @@ return [
         Fruty\SmartHome\Common\Providers\AwareServiceProvider::class,
         Fruty\SmartHome\Common\Providers\CommandHandlerMapServiceProvider::class,
         Fruty\SmartHome\Common\Providers\ViewComposersServiceProvider::class,
+        Fruty\SmartHome\Common\Providers\CommonSpecificationProvider::class,
 
         Fruty\SmartHome\Exchange\App\Providers\ExchangeServiceProvider::class
 

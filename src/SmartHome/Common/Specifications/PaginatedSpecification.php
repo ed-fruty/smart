@@ -2,7 +2,9 @@
 
 namespace Fruty\SmartHome\Common\Specifications;
 
-class PaginatedSpecification
+use Fruty\SmartHome\Common\Specifications\Contracts\SpecificationInterface;
+
+class PaginatedSpecification implements SpecificationInterface
 {
     /**
      * @var int
@@ -39,7 +41,7 @@ class PaginatedSpecification
     /**
      * @return int
      */
-    public function getPage(): int
+    public function getPage()
     {
         return $this->page;
     }
@@ -47,7 +49,7 @@ class PaginatedSpecification
     /**
      * @return int
      */
-    public function getPerPage(): int
+    public function getPerPage()
     {
         return $this->perPage;
     }
