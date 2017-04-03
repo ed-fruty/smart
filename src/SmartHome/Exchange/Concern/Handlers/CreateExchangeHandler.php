@@ -6,6 +6,7 @@ use Fruty\SmartHome\Common\Events\Traits\EventDispatcherAware;
 use Fruty\SmartHome\Exchange\Concern\Commands\CreateExchangeCommand;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeRepositoryAwareInterface;
+use Fruty\SmartHome\Exchange\Concern\Events\ExchangeEvent;
 use Fruty\SmartHome\Exchange\Concern\Events\ExchangeWasCreated;
 use Fruty\SmartHome\Exchange\Concern\Traits\ExchangeRepositoryAware;
 
@@ -27,7 +28,7 @@ class CreateExchangeHandler implements EventDispatcherAwareInterface, ExchangeRe
 
         $this->exchangeRepository->save($exchange);
 
-        $this->eventDispatcher->dispatch(new ExchangeWasCreated($exchange));
+        $this->eventDispatcher->dispatch(ExchangeEvent::EXCHANGE_WAS_CREATED, new ExchangeWasCreated($exchange));
 
         return $exchange;
     }

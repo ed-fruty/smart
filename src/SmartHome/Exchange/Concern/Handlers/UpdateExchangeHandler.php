@@ -7,6 +7,7 @@ use Fruty\SmartHome\Common\Status\Status;
 use Fruty\SmartHome\Exchange\Concern\Commands\UpdateExchangeCommand;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeInterface;
 use Fruty\SmartHome\Exchange\Concern\Contracts\ExchangeRepositoryAwareInterface;
+use Fruty\SmartHome\Exchange\Concern\Events\ExchangeEvent;
 use Fruty\SmartHome\Exchange\Concern\Events\ExchangeWasUpdated;
 use Fruty\SmartHome\Exchange\Concern\Traits\ExchangeRepositoryAware;
 
@@ -28,7 +29,7 @@ class UpdateExchangeHandler implements ExchangeRepositoryAwareInterface, EventDi
 
         $this->exchangeRepository->save($exchange);
 
-        $this->eventDispatcher->dispatch(new ExchangeWasUpdated($exchange));
+        $this->eventDispatcher->dispatch(ExchangeEvent::EXCHANGE_WAS_UPDATED, new ExchangeWasUpdated($exchange));
 
         return $exchange;
     }
