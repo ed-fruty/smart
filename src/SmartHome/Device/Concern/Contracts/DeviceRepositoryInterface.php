@@ -11,4 +11,9 @@ interface DeviceRepositoryInterface
      * @return DeviceInterface
      */
     public function findOrFail(DeviceId $deviceId);
+
+    /**
+     * @return DeviceModelFactoryInterface
+     */
+    public function getDeviceModelFactory() : DeviceModelFactoryInterface;
 }
