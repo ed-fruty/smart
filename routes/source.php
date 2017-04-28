@@ -10,7 +10,7 @@ use Illuminate\Routing\Router;
 
 /** @var \Illuminate\Routing\Router $router */
 
-$router->group(['prefix' => 'exchange'], function(Router $router) {
+$router->group(['prefix' => 'exchanges'], function(Router $router) {
 
     $router->get('/')
         ->uses(GetExchangeListAction::class)

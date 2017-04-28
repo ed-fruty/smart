@@ -27,17 +27,17 @@
             <tbody>
                 @foreach($collection as $exchange)
                     <tr>
-                        <td> {{ $exchange->id }}</td>
-                        <td> {{ $exchange->name }}</td>
-                        <td> {{ $exchange->status->getName() }}</td>
-                        <td> {{ $exchange->connector }}</td>
-                        <td> {{ $exchange->created_at }}</td>
-                        <td> {{ $exchange->updated_at }}</td>
+                        <td> {{ $exchange->getId() }}</td>
+                        <td> {{ $exchange->getName() }}</td>
+                        <td> {{ $exchange->getStatus()->getName() }}</td>
+                        <td> {{ $exchange->getConnectorName() }}</td>
+                        <td> {{ $exchange->getCreatedAt() }}</td>
+                        <td> {{ $exchange->getUpdatedAt() }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('exchange.edit', $exchange->id)  }}" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('exchange.edit', $exchange->getId()->getId())  }}" class="btn btn-warning">Edit</a>
                                 <a href="#" class="btn btn-info">Devices</a>
-                                <form action="{{ route('exchange.delete', $exchange->id) }}">
+                                <form action="{{ route('exchange.delete', $exchange->getId()->getId()) }}">
 
                                 </form>
                             </div>

@@ -15,5 +15,17 @@ interface DeviceRepositoryInterface
     /**
      * @return DeviceModelFactoryInterface
      */
-    public function getDeviceModelFactory() : DeviceModelFactoryInterface;
+    public function getFactory() : DeviceModelFactoryInterface;
+
+    /**
+     * @param DeviceInterface $device
+     * @return bool
+     */
+    public function save(DeviceInterface $device) : bool;
+
+    /**
+     * @param DeviceInterface $device
+     * @return bool
+     */
+    public function remove(DeviceInterface $device) : bool;
 }

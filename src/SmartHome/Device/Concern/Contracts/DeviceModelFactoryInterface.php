@@ -11,7 +11,8 @@ interface DeviceModelFactoryInterface
     public function createReadDevice() : DeviceInterface;
 
     /**
+     * @param DeviceInterface $device
      * @return WriteDeviceInterface
      */
-    public function createWriteDevice() : WriteDeviceInterface;
+    public function createWriteDevice(DeviceInterface $device) : WriteDeviceInterface;
 }
