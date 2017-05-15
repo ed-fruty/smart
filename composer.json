@@ -8,7 +8,10 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "league/fractal": "^0.15.0"
+        "league/fractal": "^0.15.0",
+        "php-pm/httpkernel-adapter": "dev-master",
+        "php-pm/php-pm": "dev-master",
+        "react/http": "dev-master#cd15204bd15d106d7832c680e4fb0ca0ce2f5e30"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -48,5 +51,7 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
-    }
+    },
+
+    "minimum-stability": "dev"
 }

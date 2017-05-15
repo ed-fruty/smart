@@ -26,3 +26,8 @@ $router->resources([
     'device'    => 'DeviceController',
     'command'   => 'DeviceCommandController',
 ]);
+
+
+$router->get('/go/{project}', function($project) {
+    return redirect()->to('/');
+});

@@ -31,7 +31,7 @@ class ExchangeController extends Controller
      */
     public function create()
     {
-        return view('exchange.index');
+        return view('exchange.create');
     }
 
     /**
