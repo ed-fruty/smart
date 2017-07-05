@@ -8,15 +8,15 @@ use Illuminate\Contracts\Support\Jsonable;
 class Status implements Arrayable, Jsonable, \JsonSerializable
 {
     const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = -1;
+    const STATUS_DISABLED = 0;
 
     private $value;
 
     /**
      * Status constructor.
-     * @param $value
+     * @param int $value
      */
-    public function __construct($value)
+    public function __construct(int $value)
     {
         $list = static::dropDown();
 
@@ -39,15 +39,24 @@ class Status implements Arrayable, Jsonable, \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @param string $name
+     * @return Status
      */
-    public function getName()
+    public static function createFromName(string $name): Status
+    {
+        return new static((int) array_search($name, static::dropDown()));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
         return $this->dropDown()[$this->value];
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getValue()
     {
@@ -75,7 +84,7 @@ class Status implements Arrayable, Jsonable, \JsonSerializable
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->jsonSerialize());
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**
