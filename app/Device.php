@@ -7,6 +7,7 @@ use App\Common\Status\Status;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Device
@@ -44,5 +45,13 @@ class Device extends Model
     public function exchange(): BelongsTo
     {
         return $this->belongsTo(Exchange::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function properties(): HasMany
+    {
+        return $this->hasMany(DeviceProperty::class);
     }
 }

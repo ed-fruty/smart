@@ -7,6 +7,7 @@ use App\Common\Status\Status;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -62,5 +63,15 @@ class DeviceProperty extends Model
     public function configuration(): HasOne
     {
         return $this->hasOne(DevicePropertyConfiguration::class);
+    }
+
+    /**
+     * History relation.
+     *
+     * @return HasMany
+     */
+    public function history(): HasMany
+    {
+        return $this->hasMany(DevicePropertyHistory::class);
     }
 }
