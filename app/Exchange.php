@@ -6,8 +6,8 @@ use App\Common\Status\Status;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Exchange
@@ -54,10 +54,10 @@ class Exchange extends Model
     /**
      * Configuration relation.
      *
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function configuration(): BelongsTo
+    public function configuration(): HasOne
     {
-        return $this->belongsTo(ExchangeConfiguration::class);
+        return $this->hasOne(ExchangeConfiguration::class);
     }
 }

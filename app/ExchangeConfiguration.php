@@ -4,7 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class ExchangeConfiguration
@@ -41,10 +41,10 @@ class ExchangeConfiguration extends Model
     /**
      * Exchange relation.
      *
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function exchange(): HasOne
+    public function exchange(): BelongsTo
     {
-        return $this->hasOne(Exchange::class);
+        return $this->belongsTo(Exchange::class);
     }
 }
