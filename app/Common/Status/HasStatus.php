@@ -3,12 +3,12 @@
 namespace App\Common\Status;
 
 /**
- * Trait Statusable
+ * Trait HasStatus
  * @package App\Common\Status
  *
  * @property Status status
  */
-trait Statusable
+trait HasStatus
 {
     /**
      * @return Status
@@ -16,5 +16,13 @@ trait Statusable
     public function getStatusAttribute()
     {
         return new Status($this->attributes['status']);
+    }
+
+    /**
+     * @param Status $status
+     */
+    public function setStatusAttribute(Status $status)
+    {
+        $this->attributes['status'] = $status->getValue();
     }
 }
