@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\ViewComposers\StatusViewComposer;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposerServiceProvider extends ServiceProvider

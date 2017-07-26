@@ -2,56 +2,49 @@
 
 namespace App;
 
-use App\Common\Status\HasStatus;
-use App\Common\Status\Status;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class Device
+ * Class ExchangeConfiguration
  * @package App
  *
  * @property int $id
- * @property string $name
- * @property int $pin
- * @property Status $status
+ * @property string $dsn
+ * @property string $ping_time
+ * @property int $exchange_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @property Exchange $exchange
  */
-class Device extends Model
+class ExchangeConfiguration extends Model
 {
-    use HasStatus;
 
     /**
+     * Mass assignment attributes.
+     *
      * @var array
      */
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['dsn', 'ping_time'];
 
     /**
+     * Casts attributes.
+     *
      * @var array
      */
     protected $casts = [
-        'id'    => 'int',
-        'pin'   => 'int'
+        'id'    => 'int'
     ];
 
     /**
+     * Exchange relation.
+     *
      * @return BelongsTo
      */
     public function exchange(): BelongsTo
     {
         return $this->belongsTo(Exchange::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function properties(): HasMany
-    {
-        return $this->hasMany(DeviceProperty::class);
     }
 }

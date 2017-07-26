@@ -2,11 +2,12 @@
 
 namespace App;
 
-use App\Common\Status\HasStatus;
+use App\Common\Status\Status;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Exchange
@@ -14,33 +15,44 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property int $id
  * @property string $name
+ * @property Status $status
+ * @property int $type
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  *
+ * @property ExchangeConfiguration $configuration
  * @property Collection|Device[] $devices
+ *
+ * @property string $type_name
  */
 class Exchange extends Model
 {
-    use HasStatus;
+    public const TYPE_ARDUINO = 1;
+    public const TYPE_STREAM = 2;
+    public const TYPE_RESOURCE = 3;
+    public const TYPE_RASPBERRY = 4;
 
-    public const ATTRIBUTE_ID = 'id';
-    public const ATTRIBUTE_NAME = 'name';
-    public const ATTRIBUTE_STATUS = 'status';
+    /**
+     * Mass assignment attributes.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'status', 'type'];
 
-    public const ATTRIBUTES = [
-        self::ATTRIBUTE_ID,
-        self::ATTRIBUTE_NAME,
-        self::ATTRIBUTE_STATUS
-    ];
-
-    protected $fillable = [
-        self::ATTRIBUTE_NAME,
-        self::ATTRIBUTE_STATUS
-    ];
-
+    /**
+     * Casts attributes.
+     *
+     * @var array
+     */
     protected $casts = [
-        self::ATTRIBUTE_ID => 'int',
-        self::ATTRIBUTE_NAME    => 'string',
-        self::ATTRIBUTE_STATUS  => Common\Status\Status::class
+        'id'    => 'int',
+        'type'  => 'int'
     ];
+
+    /**
+     * @var array
+     */
+    protected $appends = ['type_name'];
 
     /**
      * Devices relation.
@@ -53,10 +65,33 @@ class Exchange extends Model
     }
 
     /**
-     * @return BelongsTo
+     * Configuration relation.
+     *
+     * @return HasOne
      */
-    public function settings(): BelongsTo
+    public function configuration(): HasOne
     {
-        return $this->belongsTo(ExchangeSettings::class);
+        return $this->hasOne(ExchangeConfiguration::class);
+    }
+
+    /**
+     * @return array
+     */
+    public static function typesDropDown()
+    {
+        return [
+            self::TYPE_ARDUINO  => 'Arduino',
+            self::TYPE_STREAM   => 'Stream',
+            self::TYPE_RESOURCE => 'Resource',
+            self::TYPE_RASPBERRY => 'Raspberry'
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeNameAttribute(): string
+    {
+        return static::typesDropDown()[$this->type];
     }
 }
